@@ -42,7 +42,6 @@ def SHM_x(f,A,t,ang=False):
         return A * np.cos(2 * np.pi * f * t)
     
 #signals
-#FIXME: These should all work for non-iterable inputs
 def sin(f, A, phi=0):
     return lambda x: (A / 2) * np.sin(2 * np.pi * f * x + phi)
 def square(f,A, phi=0):
@@ -53,7 +52,13 @@ def square(f,A, phi=0):
             return (A/2)
         else:
             return -(A/2)
-    return lambda x: np.array([func(i + phi) for i in x])
+    def iter_x(x):
+        try:
+            iter(x)
+            return np.array([func(i + phi) for i in x])
+        except TypeError:
+            return func(x + phi)
+    return iter_x
 def triangle(f,A, phi=0):
     def func(x):
         while x > (1/f):
@@ -64,4 +69,10 @@ def triangle(f,A, phi=0):
             return -2 * A * f * x + A
         else:
             return 2 * A * f * x - 2 * A
-    return lambda x: np.array([func(i + phi) for i in x])
+    def iter_x(x):
+        try:
+            iter(x)
+            return np.array([func(i + phi) for i in x])
+        except TypeError:
+            return func(x + phi)
+    return iter_x
