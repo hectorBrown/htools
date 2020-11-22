@@ -282,7 +282,7 @@ def polar_to_square(z):
     return complex(z[0] * np.cos(z[1]), z[0] * np.sin(z[1]))
 
 #series
-#FIXME:
+#FIXME: taylor
 # def taylor(f,a,n):
 #     funcs = []
 #     for i in range(n):

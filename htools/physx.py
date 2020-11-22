@@ -5,7 +5,7 @@ Created on Wed Nov 18 19:27:13 2020
 @author: Hector
 """
 
-import numpy as np, htools.maths as htm
+import numpy as np
 
 def rocket_vel(v_0, u, M_t, M_0):
     return v_0 - u * np.log(M_t/M_0)
