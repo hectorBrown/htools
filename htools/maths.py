@@ -192,7 +192,7 @@ def cofactors(n):
     return res
     
 def __deltn(A, n):
-    return quick_det([row[:n - 2] + b + row[n + 1:] for row,b in zip([row[:-1] for row in A], [row[-1:] for row in A])])
+    return quick_det([[*row[:n - len(A)], *b, *row[n + 1:]] for row,b in zip([row[:-1] for row in A], [row[-1:] for row in A])])
 def mult(A, B):
     A = np.array(A)
     B = np.array(B)
