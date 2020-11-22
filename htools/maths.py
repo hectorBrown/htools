@@ -223,7 +223,6 @@ def hintegrate(f, a, b, polar=False):
         return integrate.quad(lambda x: 0.5 * f(x)**2, a, b)[0]
     else:
         return integrate.quad(f, a, b)[0]
-#FIXME: THIS OUGHT TO BE ABLE TO ACCEPT LISTS
 def hintegrate_fun(f,c,n):
     class inte:
         def __init__(self, n, fs, cs):
@@ -231,7 +230,11 @@ def hintegrate_fun(f,c,n):
             self.fs = fs
             self.cs = cs if type(cs) is list or type(cs) is np.ndarray else [cs]
         def intf(self, x):
-            return hintegrate(self.fs[self.n - 1], 0, x) + self.cs[self.n - 1] 
+            try:
+                iter(x)
+                return [hintegrate(self.fs[self.n - 1],0,i) + self.cs[self.n - 1] for i in x]
+            except TypeError:
+                return hintegrate(self.fs[self.n - 1], 0, x) + self.cs[self.n - 1] 
     fs = [f]
     for i in range(1,n + 1):
         df = inte(i, fs, c)
