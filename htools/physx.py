@@ -42,6 +42,7 @@ def SHM_x(f,A,t,ang=False):
         return A * np.cos(2 * np.pi * f * t)
     
 #signals
+#FIXME: These should all work for non-iterable inputs
 def sin(f, A):
     return lambda x: (A / 2) * np.sin(2 * np.pi * f * x)
 def square(f,A):
