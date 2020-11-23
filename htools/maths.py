@@ -282,16 +282,27 @@ def polar_to_square(z):
     return complex(z[0] * np.cos(z[1]), z[0] * np.sin(z[1]))
 
 #series
-#FIXME: taylor
-# def taylor(f,a,n):
-#     funcs = []
-#     for i in range(n):
-#         if i == 0:
-#             funcs.append(lambda x: f(a))
-#         else:
-#             funcs.append(lambda x: derivative_fun(f,i)(a)/np.math.factorial(i) * (x-a)**i)
-#     print([f(1) for f in funcs])
-#     return lambda x: sum([f(x) for f in funcs])
+def taylor(f,a,n):
+    class TaylorTerm:
+        def __init__(self, n, f, a):
+            self.n = n
+            self.a = a
+            self.f = f
+        def func(self, x):
+            return derivative_fun(self.f,self.n)(self.a)/np.math.factorial(self.n) * (x-self.a)**self.n
+    def iter_x(x):
+        try:
+            iter(x)
+            return [sum([g(i) for g in funcs]) for i in x]
+        except TypeError:
+            return sum([g(x) for g in funcs])
+    funcs = []
+    for i in range(n):
+        if i == 0:
+            funcs.append(lambda x: f(a))
+        else:
+            funcs.append(TaylorTerm(i,f,a).func)
+    return iter_x
 def fibon_lazy():
     a = 1
     yield a
