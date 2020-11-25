@@ -7,6 +7,9 @@ Created on Wed Nov 18 19:27:13 2020
 
 import numpy as np
 
+G = 6.67408e-11
+M_sun = 1.989e30
+
 def rocket_vel(v_0, u, M_t, M_0):
     return v_0 - u * np.log(M_t/M_0)
 def CoM_to_lab(p_ast, q_ast, the_ast, m_1, m_2):
@@ -40,7 +43,18 @@ def SHM_x(f,A,t,ang=False):
         return A * np.cos(f * t)
     else:
         return A * np.cos(2 * np.pi * f * t)
-    
+def KIII_T(M, a):
+    return np.sqrt((4 * np.pi**2 * a**3)/(G * M))
+def KIII_a(M, T):
+    return ((T**2 * G * M)/(4 * np.pi**2))**(1/3)
+def E_orbit(M, m, a):
+    return -(G * M * m)/ (2 * a)
+def E_spring(m, ome, A):
+    return 0.5 * m * ome**2 * A**2
+def K_spring(m, ome, A, t, phi):
+    return 0.5 * m * ome**2 * A**2 * np.sin(ome * t + phi)**2
+def U_spring(m, ome, A, t, phi):
+    return 0.5 * m * ome**2 * A**2 * np.cos(ome * t + phi)**2
 #signals
 def sin(f, A, phi=0):
     return lambda x: (A / 2) * np.sin(2 * np.pi * f * x + phi)
