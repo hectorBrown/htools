@@ -203,6 +203,8 @@ def mult(A, B):
                 res[r][c] = sum([x * y for x,y in zip(row,col)])
     return res
 def inverse(A):
+    if quick_det(A) == 0:
+        return None
     A = np.array(A)
     res = np.zeros((len(A),len(A[0])))
     for i,row in enumerate(A):
