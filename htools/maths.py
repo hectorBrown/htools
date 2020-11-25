@@ -202,6 +202,13 @@ def mult(A, B):
             for c, col in enumerate(np.transpose(B)):
                 res[r][c] = sum([x * y for x,y in zip(row,col)])
     return res
+def inverse(A):
+    A = np.array(A)
+    res = np.zeros((len(A),len(A[0])))
+    for i,row in enumerate(A):
+        for j,row in enumerate(row):
+            res[i][j] = quick_det(minor(A,i,j)) * (-1)**(i + j)
+    return np.array(np.array(res).transpose()) / quick_det(A)
 
 #calculus
 def derivative(f, a, h=0.01):
