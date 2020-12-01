@@ -7,8 +7,10 @@ Created on Wed Nov 18 19:27:13 2020
 
 import numpy as np
 
-G = 6.67408e-11
+G = 6.6738480e-11
 M_sun = 1.989e30
+M_earth = 5.972e24
+R_earth = 6371e3
 
 def rocket_vel(v_0, u, M_t, M_0):
     return v_0 - u * np.log(M_t/M_0)
