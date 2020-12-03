@@ -335,3 +335,19 @@ def fibon(n, _list=True):
     if n == 1 and _list: return [1]
     if n == 1 or n == 2 and not _list: return 1
     return res if _list else c
+
+#combinations/permutations
+def perm(li, fixed=[]):
+    res = []
+    if len(li) == 1:
+        temp = fixed.copy()
+        temp.extend(li)
+        return temp
+    for i, item in enumerate(li):
+        temp = fixed.copy()
+        temp.append(item)
+        if len(fixed) != 0:
+            res.append(perm([elem for a, elem in enumerate(li) if a != i], temp))
+        else:
+            res.extend(perm([elem for a, elem in enumerate(li) if a != i], temp))
+    return res
