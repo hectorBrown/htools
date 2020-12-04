@@ -337,7 +337,7 @@ def fibon(n, _list=True):
     return res if _list else c
 
 #combinations/permutations
-def perm(li, fixed=[]):
+def perm(li, _fixed=[]):
     res = []
     if len(li) == 1:
         temp = fixed.copy()
