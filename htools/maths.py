@@ -340,11 +340,11 @@ def fibon(n, _list=True):
 def perm(li, _fixed=[]):
     res = []
     if len(li) == 1:
-        temp = fixed.copy()
+        temp = _fixed.copy()
         temp.extend(li)
         return temp
     for i, item in enumerate(li):
-        temp = fixed.copy()
+        temp = _fixed.copy()
         temp.append(item)
         if len(li) == 2:
             res.append(perm([elem for a, elem in enumerate(li) if a != i], temp))
