@@ -346,7 +346,7 @@ def perm(li, fixed=[]):
     for i, item in enumerate(li):
         temp = fixed.copy()
         temp.append(item)
-        if len(fixed) != 0:
+        if len(li) == 2:
             res.append(perm([elem for a, elem in enumerate(li) if a != i], temp))
         else:
             res.extend(perm([elem for a, elem in enumerate(li) if a != i], temp))
