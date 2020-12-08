@@ -351,3 +351,11 @@ def perm(li, _fixed=[]):
         else:
             res.extend(perm([elem for a, elem in enumerate(li) if a != i], temp))
     return res
+def distribute_into_buckets(buckets, n):
+    if buckets == 1:
+        return [[n]]
+    res = []
+    for i in range(n + 1):
+        for x in get_all_distributions(buckets - 1, n - i):
+            res.append([i] + x)
+    return res
